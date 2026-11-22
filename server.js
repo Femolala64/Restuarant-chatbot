@@ -55,7 +55,8 @@ app.get("/pay/:orderId", async (req, res) => {
 
   try {
     const callbackUrl = `${req.protocol}://${req.get("host")}/payment/callback`;
-    const url = await startPayment(order, "customer@bloom.test", callbackUrl);
+    const email = `${req.deviceId}@example.com`; 
+    const url = await startPayment(order, email, callbackUrl);
     res.redirect(url);
   } catch (err) {
     console.error("startPayment failed:", err.message);
